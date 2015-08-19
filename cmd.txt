@@ -1,0 +1,26 @@
+
+
+rails new blog_proj
+
+# Create Controller
+bin/rails g controller home
+
+# Create Database (Rails doesn't work without it)
+bin/rake db:create
+
+# Set Routes
+edit config/routes.rb
+# Set Get routes for your home page
+# Set the root to point to your home page
+
+# Create index.html.erb in views/
+# Put in some content
+
+# Modify layouts/application.html.erb to have a Nav bar and other content
+
+# Launch Server
+bin/rails s
+
+# Rails Console
+bin/rails c
+
