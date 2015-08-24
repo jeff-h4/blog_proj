@@ -17,6 +17,9 @@ get '/posts/:id/edit' => 'posts#edit', as: :edit_post
 patch '/posts/:id' => 'posts#update'
 delete '/posts/:id' => 'posts#destroy'
 
+resources :comments
+
+
 
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
