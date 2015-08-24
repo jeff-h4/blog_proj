@@ -12,6 +12,8 @@
     <%= link_to "About", about_path, style: "color:turquoise" %>
     <%= link_to "Show All Posts", posts_path, style: "color:turquoise" %>
     <%= link_to "Create New Post", new_post_path, style: "color:turquoise" %>
+    <%= link_to "Show All Comments", comments_path, style: "color:turquoise" %>
+    <%= link_to "Create New Comment", new_comment_path, style: "color:turquoise" %>
   </nav>
 
 <%= yield %>
@@ -24,6 +26,15 @@
   <% if @post.errors.any? %>
       <ul>
       <% @post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
+<% if @comment%>
+  <% if @comment.errors.any? %>
+      <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
       <% end %>
     </ul>
