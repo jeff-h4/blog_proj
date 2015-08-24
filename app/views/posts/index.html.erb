@@ -1,0 +1,9 @@
+
+<h1>Posts Listing</h1>
+
+<% @posts.each do |p|  %>
+  <div>
+    <%= link_to p.title, post_path(id: p.id)  %>
+  </div>
+
+<% end  %>
