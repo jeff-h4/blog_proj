@@ -8,14 +8,14 @@
 #
 NUM_ENTRIES = 100
 NUM_ENTRIES.times do
-  #title = Faker::Hacker.say_something_smart
-  #body = Faker::Lorem.paragraph
-  #created_at = Time.now - (rand(30)).days
-  #Post.create({title: title,
-  #             body: body,
-  #             created_at: created_at})
-  body = Faker::Company.catch_phrase
+  title = Faker::Hacker.say_something_smart
+  body = Faker::Lorem.paragraph
   created_at = Time.now - (rand(30)).days
-  Comment.create({body: body,
+  Post.create({title: title,
+               body: body,
                created_at: created_at})
+  #body = Faker::Company.catch_phrase
+  #created_at = Time.now - (rand(30)).days
+  #Comment.create({body: body,
+  #             created_at: created_at})
 end
