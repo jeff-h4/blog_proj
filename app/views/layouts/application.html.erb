@@ -11,24 +11,10 @@
     <%= render "/layouts/nav"  %>
 
     <%= yield %>
-    <% if flash[:notice]  %>
-      <div role="alert"><%= flash[:notice]  %></div>
-    <% elsif flash[:alert]  %>
-      <div role="alert"><%= flash[:alert]  %></div>
-    <% end %>
     <% if @post  %>
       <% if @post.errors.any? %>
           <ul>
           <% @post.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-          <% end %>
-        </ul>
-      <% end %>
-    <% end %>
-    <% if @comment%>
-      <% if @comment.errors.any? %>
-          <ul>
-          <% @comment.errors.full_messages.each do |msg| %>
               <li><%= msg %></li>
           <% end %>
         </ul>

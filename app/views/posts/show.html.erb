@@ -6,4 +6,34 @@
 
 <%= link_to "Edit", edit_post_path(@post), class: "btn btn-info"  %>
 <%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"  %>
+
+<hr>
+<div class="container-fluid">
+  <h2>Add a new comment: </h2>
+  <%= render "/layouts/alertflash"   %>
+  <% if @comment.errors.any?  %>
+    <ul>
+    <% @comment.errors.full_messages.each do |err|  %>
+      <li><%= err  %></li>
+    <% end  %>
+    </ul>
+  <% end  %>
+  <%= form_for [@post,@comment] do |f|  %>
+    <div class="form-group"
+      <%= f.label :body  %>
+      <%= f.text_area :body, class: "form-group"  %>
+    </div>
+    <%= f.submit "Add Comment", class: "btn btn-primary"  %> 
+  <% end  %>
+  <h2>Discussion:</h2>
+  <% @post.comments.reverse.each do |cmt|  %>
+    <div class="well">
+      <%= cmt.body  %>
+      <%= link_to "Delete", post_comment_path(@post, cmt), 
+                            method: :delete,
+                            class: "btn btn-danger",
+                            data: {confirm: "Are you sure?"} %>
+    </div>
+  <% end  %>
+</div>
   
