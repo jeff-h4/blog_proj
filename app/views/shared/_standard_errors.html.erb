@@ -1,8 +1,12 @@
 
-<% if object.errors.any?  %>
-  <ul>
-    <% object.errors.full_messages.each do |msg|  %>
-      <li><%= msg %></li>
+<div class="container-fluid">
+  <% if object  %>
+    <% if object.errors.any?  %>
+      <ul>
+        <% object.errors.full_messages.each do |msg|  %>
+          <li><%= msg %></li>
+        <% end  %>
+      </ul>
     <% end  %>
-  </ul>
-<% end  %>
+  <% end  %>
+</div>

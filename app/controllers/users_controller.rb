@@ -13,6 +13,24 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = current_user
+  end
+  def update
+    @user = current_user
+    if @user.authenticate(params[:user][:current_password])
+      if @user.update user_params
+        redirect_to edit_users_path, notice: "Profile Updated!"
+      else
+        flash[:alert] = "See errors below:"
+        render :edit
+      end
+    else
+      flash[:alert] = "Current Password entry incorrect."
+      render :edit
+    end
+  end
+
   private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email,
