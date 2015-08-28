@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
 
   def user_name
     if user
-      user.full_name
+      user.user_name
     else
       "Anonymous"
     end

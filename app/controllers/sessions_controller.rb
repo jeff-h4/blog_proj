@@ -7,7 +7,12 @@ class SessionsController < ApplicationController
     @user = User.find_by_email params[:email]
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect_to root_path, notice: "Signed in Successfully"
+
+      if @user.posts.count == 0
+        redirect_to new_post_path, notice: "Signed in Successfully"
+      else
+        redirect_to root_path, notice: "Signed in Successfully"
+      end
     else
       flash[:alert] = "Wrong credentials!"
       render :new
