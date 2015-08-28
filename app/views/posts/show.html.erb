@@ -2,6 +2,7 @@
 <h1>Showing post</h1>
 
 <h2><%= @post.title  %></h2>
+<em>Created by: <%= @post.user_name  %> on <%= formatted_date(@post.created_at) %></em>
 <p><%= @post.body %></p>
 
 <%= link_to "Edit", edit_post_path(@post), class: "btn btn-info"  %>
@@ -19,12 +20,12 @@
     </ul>
   <% end  %>
   <%= form_for [@post,@comment] do |f|  %>
-    <div class="form-group"
+    <div class="form-group">
       <%= f.label :body  %>
       <%= f.text_area :body, class: "form-group"  %>
     </div>
     <%= f.submit "Add Comment", class: "btn btn-primary"  %> 
-  <% end  %>
+  <% end %>
   <h2>Discussion:</h2>
   <% @post.comments.reverse.each do |cmt|  %>
     <div class="well">
