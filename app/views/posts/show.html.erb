@@ -4,7 +4,20 @@
 <h2><%= @post.title  %></h2>
 <em>Created by: <%= @post.user_name  %> on <%= formatted_date(@post.created_at) %></em>
 <p><%= @post.body %></p>
-
+<p>Favourite: <%= @post.favourite %></p>
+<% if @post.favourite?  %>
+  <%# link_to "Favourite", edit_post_path(@post), class: "btn btn-warning"  %>
+  <%= form_for @post do |f| %>
+    <%= f.hidden_field :favourite, value: "true"  %>
+    <%= f.submit "Un-Favourite", class: "btn btn-info" %>
+  <% end %>
+<% else  %>
+  <%# link_to "Un-Favourite", edit_post_path(@post), class: "btn btn-warning"  %>
+  <%= form_for @post do |f| %>
+    <%= f.hidden_field :favourite, value: "false" %>
+    <%= f.submit "Favourite", class: "btn btn-info" %>
+  <% end %>
+<% end %>
 <%= link_to "Edit", edit_post_path(@post), class: "btn btn-info"  %>
 <%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"  %>
 
