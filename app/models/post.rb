@@ -11,4 +11,21 @@ class Post < ActiveRecord::Base
       "Anonymous"
     end
   end
+
+  def self.search(item)
+    search_term = "%#{item}%"
+    where(["title ILIKE :term OR body ILIKE :term",term: search_term])
+  end
+
+  def self.search_multiple(words)
+    query = []
+    terms = []
+    words.split.each do |word|
+      search_term = "%#{word}%"
+      terms << search_term
+      terms << search_term
+      query << "title ILIKE ? OR body ILIKE ?"
+    end
+    where([query.join( " OR ")] + terms)
+  end
 end

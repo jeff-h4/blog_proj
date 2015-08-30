@@ -1,6 +1,15 @@
 
 <h1>Posts Listing</h1>
+<div class="container-fluid">
+  <%= form_tag posts_path, method: :get do  %>
+    <%= search_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", class: "btn btn-sm"  %>
+  <% end  %>
+</div>
 <%= paginate @posts  %>
+
+<%= link_to "order by title", posts_path(search: params[:search], order: "title")  %>
+<%= link_to "order by body", posts_path(search: params[:search], order: "body")  %>
 <% @posts.each do |p|  %>
   <div>
     <%= link_to p.title, post_path(id: p.id)  %>

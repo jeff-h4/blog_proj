@@ -3,6 +3,8 @@ class PostsController < ApplicationController
   before_action :find_post, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:show, :index]
 
+  PER_PAGE = 10
+
   def new
     @post = Post.new
   end
@@ -46,7 +48,12 @@ class PostsController < ApplicationController
     end
   end
   def index
-    @posts = Post.all.order(:id).page params[:page]
+    #@posts = Post.all.order(:id).page params[:page]
+    if params[:search]
+      @posts = Post.search(params[:search]).order(params[:order]).page(params[:page]).per(PER_PAGE)
+    else
+      @posts = Post.order(params[:order]).page(params[:page]).per(PER_PAGE)
+    end
   end
   def destroy
     @post.destroy
