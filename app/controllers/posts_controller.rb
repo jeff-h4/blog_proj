@@ -46,7 +46,7 @@ class PostsController < ApplicationController
     end
   end
   def index
-    @posts = Post.all
+    @posts = Post.all.order(:id).page params[:page]
   end
   def destroy
     @post.destroy

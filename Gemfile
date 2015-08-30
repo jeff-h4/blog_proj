@@ -33,6 +33,7 @@ gem 'rails_12factor', group: :production
 
 gem 'cowsay'
 gem 'faker'
+gem 'kaminari'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
