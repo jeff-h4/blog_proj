@@ -6,10 +6,10 @@
     <%= submit_tag "Search", class: "btn btn-sm"  %>
   <% end  %>
 </div>
-<%= paginate @posts  %>
+<p><%= paginate @posts  %></p>
 
-<%= link_to "order by title", posts_path(search: params[:search], order: "title")  %>
-<%= link_to "order by body", posts_path(search: params[:search], order: "body")  %>
+<em><%= link_to "order by title", posts_path(search: params[:search], order: "title")  %></em>
+<em><%= link_to "order by body", posts_path(search: params[:search], order: "body")  %></em>
 <% @posts.each do |p|  %>
   <div>
     <%= link_to p.title, post_path(id: p.id)  %>
