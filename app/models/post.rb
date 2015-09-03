@@ -1,6 +1,10 @@
 class Post < ActiveRecord::Base
   belongs_to :user
   has_many :comments, dependent: :destroy
+
+  has_many :favourites, dependent: :destroy
+  has_many :favourited_users, through: :favourites, source: :user
+
   validates :title, presence: true, uniqueness: true
   paginates_per 10
 

@@ -22,6 +22,7 @@ class PostsController < ApplicationController
 
   def show
     @comment = Comment.new
+    @favourite = @post.favourites.find_by_user_id(current_user.id) if user_signed_in?
   end
 
   def edit

@@ -1,26 +1,24 @@
 
 <h1>Showing post</h1>
-
+<!--======================POST DISPLAY==============================   -->
 <h2><%= @post.title  %></h2>
-<em>Created by: <%= @post.user_name  %> on <%= formatted_date(@post.created_at) %></em>
+<em>Created by:<%= @post.user_name  %> on <%= formatted_date(@post.created_at) %></em>
 <p><%= @post.body %></p>
-<p>Favourite: <%= @post.favourite %></p>
-<% if @post.favourite?  %>
-  <%# link_to "Favourite", edit_post_path(@post), class: "btn btn-warning"  %>
-  <%= form_for @post do |f| %>
-    <%= f.hidden_field :favourite, value: "true"  %>
-    <%= f.submit "Un-Favourite", class: "btn btn-info" %>
-  <% end %>
-<% else  %>
-  <%# link_to "Un-Favourite", edit_post_path(@post), class: "btn btn-warning"  %>
-  <%= form_for @post do |f| %>
-    <%= f.hidden_field :favourite, value: "false" %>
-    <%= f.submit "Favourite", class: "btn btn-info" %>
+<p>Favourited by <%= @post.favourited_users.count  %> users</p>
+<!--======================Change Favourite==============================   -->
+<% if user_signed_in?  %>
+  <% if current_user.favourited_post?(@post)  %>
+    <%= link_to fa_icon("star"), post_favourite_path(@post,@favourite), title: "Un-Favourite", class: "big-icon", method: :delete%>
+  <% else  %>
+    <%= link_to fa_icon("star-o"), post_favourites_path(@post), title: "Favourite", class: "big-icon", method: :post  %>
   <% end %>
 <% end %>
+
+<!--======================Edit and Delete==============================   -->
 <%= link_to "Edit", edit_post_path(@post), class: "btn btn-info"  %>
 <%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"  %>
 
+<!--======================Add Comments==============================   -->
 <hr>
 <div class="container-fluid">
   <div class="well">
@@ -41,6 +39,7 @@
       <%= f.submit "Add Comment", class: "btn btn-primary"  %> 
     <% end %>
   </div>
+<!--======================Display Comments==============================   -->
   <div class="well">
   <h2>Discussion:</h2>
     <% @post.comments.reverse.each do |cmt|  %>
