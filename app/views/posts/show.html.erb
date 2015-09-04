@@ -5,6 +5,7 @@
 <em>Created by:<%= @post.user_name  %> on <%= formatted_date(@post.created_at) %></em>
 <p><%= @post.body %></p>
 <p>Favourited by <%= @post.favourited_users.count  %> users</p>
+<p>Tags: <%= @post.tags.map(&:name).join(", ")  %></p>
 <!--======================Change Favourite==============================   -->
 <% if user_signed_in?  %>
   <% if current_user.favourited_post?(@post)  %>

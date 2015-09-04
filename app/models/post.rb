@@ -5,6 +5,9 @@ class Post < ActiveRecord::Base
   has_many :favourites, dependent: :destroy
   has_many :favourited_users, through: :favourites, source: :user
 
+  has_many :post_tag_links, dependent: :destroy
+  has_many :tags, through: :post_tag_links
+
   validates :title, presence: true, uniqueness: true
   paginates_per 10
 

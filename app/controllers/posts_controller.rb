@@ -66,7 +66,7 @@ class PostsController < ApplicationController
   end
   private
   def post_params
-    params.require(:post).permit([:title,:body,:favourite])
+    params.require(:post).permit([:title,:body,:favourite,{tag_ids:[]} ])
   end
   def find_post
     @post = Post.find params[:id]

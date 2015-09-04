@@ -6,17 +6,5 @@
 <% end  %>
 
 <hr>
-<%= form_for @post, html:{class: "form-horizontal"} do |f|  %>
-  <div>
-    <%= f.label :title  %>
-    <%= f.text_field :title, class: "form-control"  %>
-  </div>
-  <div>
-    <%= f.label :body  %>
-    <%= f.text_field :body, class: "form-control"  %>
-    <%# Because of the @post spec in the 'form_for', submit will trigger a POST action  %>
-    <%= f.submit class: "btn btn-primary"%> 
-  </div>
-<% end %>
-
+<%= render "form"  %>
 
