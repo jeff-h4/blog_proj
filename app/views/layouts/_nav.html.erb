@@ -11,6 +11,11 @@
     <div class="navbar-nav navbar-right">
       <ul class="nav nav-pills">
         <% if user_signed_in?  %>
+              <%# The link_to below will make <a> tag with data-display-favorite attribute.  %>
+              <%# This is good when using javascript to access the data %>
+              <%# link_to "My Favourite Posts", posts_path(), data: {display_favourite: true}   %>
+              <%# The link_to method below will create params[:display_favourite, and set it to true %>
+              <li><%= link_to "My Favourite Posts", posts_path(display_favourite: true)   %></li>
           <li>
             <%= link_to edit_users_path do  %>
               Hello <%= current_user.first_name  %>

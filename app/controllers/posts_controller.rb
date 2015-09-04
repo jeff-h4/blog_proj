@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :post_params, only: [:create, :update]
   before_action :find_post, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:show, :index]
+  before_action :authorize!, only: [:edit, :update, :delete]
 
   PER_PAGE = 10
 
@@ -26,6 +27,7 @@ class PostsController < ApplicationController
   end
 
   def edit
+    #redirect_to root_path, alert: "Access Denied!" unless can? :edit, @post
   end
 
   def update
@@ -52,6 +54,8 @@ class PostsController < ApplicationController
     #@posts = Post.all.order(:id).page params[:page]
     if params[:search]
       @posts = Post.search(params[:search]).order(params[:order]).page(params[:page]).per(PER_PAGE)
+    elsif params[:display_favourite]
+      @posts = current_user.favourite_posts.page(params[:page]).per(PER_PAGE)
     else
       @posts = Post.order(params[:order]).page(params[:page]).per(PER_PAGE)
     end
@@ -66,5 +70,8 @@ class PostsController < ApplicationController
   end
   def find_post
     @post = Post.find params[:id]
+  end
+  def authorize! 
+    redirect_to root_path, alert: "Access Denied!" unless can? :manage, @post
   end
 end

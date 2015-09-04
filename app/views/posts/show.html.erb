@@ -15,8 +15,16 @@
 <% end %>
 
 <!--======================Edit and Delete==============================   -->
-<%= link_to "Edit", edit_post_path(@post), class: "btn btn-info"  %>
-<%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"  %>
+<% if user_signed_in?  %>
+  <%# The can? method calls will only prevent displaying the link  %>
+  <%# It will not protect against manual URL entry for editing/deleting  %>
+  <% if can? :edit, @post  %>
+    <%= link_to "Edit", edit_post_path(@post), class: "btn btn-info"  %>
+  <% end %>
+  <% if can? :destroy, @post  %>
+    <%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"  %>
+  <% end %>
+<% end %>
 
 <!--======================Add Comments==============================   -->
 <hr>
