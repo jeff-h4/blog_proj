@@ -6,7 +6,8 @@ class CommentsController < ApplicationController
     @comment.post = @post
     @comment.user = @post.user
     if @comment.save
-      CommentsMailer.notify_post_owner(@comment).deliver_now
+      #CommentsMailer.notify_post_owner(@comment).deliver_later()
+      CommentsMailer.delay(run_at: 1.minutes.from_now).notify_post_owner(@comment)
       redirect_to post_path(@post), notice: "Comment created!"
     else
       flash[:alert] = "Comment not created! See errors below:"

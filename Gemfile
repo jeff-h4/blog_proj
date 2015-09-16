@@ -36,7 +36,8 @@ gem 'faker'
 gem 'kaminari'
 gem 'font-awesome-rails'
 gem 'cancancan'
-
+gem 'delayed_job_active_record'
+gem 'delayed_job_web'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

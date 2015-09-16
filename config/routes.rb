@@ -36,7 +36,8 @@ Rails.application.routes.draw do
     delete :destroy, on: :collection
   end
 
-
+  #For Delayed job Web Interface
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
 
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
