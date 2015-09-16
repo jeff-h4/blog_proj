@@ -57,5 +57,7 @@ group :development, :test do
   gem 'hirb'
   gem 'awesome_print'
   gem 'rails-erd'
+
+  gem 'letter_opener'
 end
 

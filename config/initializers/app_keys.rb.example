@@ -1,0 +1,6 @@
+
+# This is an example app_keys file
+# The following is required for the sending mailer
+ENV["email_user_name"]  = "some_user_name"
+ENV["email_password"]   = "some_password"
+
