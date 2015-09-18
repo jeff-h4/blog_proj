@@ -35,12 +35,12 @@
     <%= render "/layouts/alertflash"   %>
     <% if @comment.errors.any?  %>
       <ul>
-      <% @comment.errors.full_messages.each do |err|  %>
-        <li><%= err  %></li>
-      <% end  %>
+        <% @comment.errors.full_messages.each do |err|  %>
+          <li><%= err  %></li>
+        <% end %>
       </ul>
     <% end  %>
-    <%= form_for [@post,@comment] do |f|  %>
+    <%= form_for [@post,@comment], remote: true do |f|  %>
       <div class="form-group">
         <%= f.label :body  %>
         <%= f.text_area :body, class: "form-control"  %>
@@ -50,19 +50,12 @@
   </div>
 <!--======================Display Comments==============================   -->
   <div class="well">
-  <h2>Discussion:</h2>
-    <% @post.comments.reverse.each do |cmt|  %>
-        <div class="well">
-          <em>On <%= formatted_date(cmt.created_at) %>, <%= cmt.user_name %> said: </em>
-          <div class="well">
-            <%= cmt.body  %>
-          </div>
-          <%= link_to "Delete", post_comment_path(@post, cmt), 
-                                method: :delete,
-                                class: "btn btn-danger",
-                                data: {confirm: "Are you sure?"} %>
-        </div>
-    <% end  %>
+    <h2>Discussion:</h2>
+    <div class="discussion">
+      <% @post.comments.reverse.each do |cmt|  %>
+        <%= render 'comments/comment', cmt: cmt %>
+     <% end  %>
+    </div>
   </div>
 </div>
   

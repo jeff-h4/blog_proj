@@ -1,0 +1,4 @@
+
+// After a comment is created in the DB, we use JS to generate the comment in the 'comments' div
+$(".discussion").prepend("<%= j render 'comment', cmt: @comment %>");
+$("#comment_body").val("");

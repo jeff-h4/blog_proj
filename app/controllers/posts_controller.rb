@@ -22,8 +22,12 @@ class PostsController < ApplicationController
   end
 
   def show
-    @comment = Comment.new
-    @favourite = @post.favourites.find_by_user_id(current_user.id) if user_signed_in?
+    respond_to do |format|
+      @comment = Comment.new
+      @favourite = @post.favourites.find_by_user_id(current_user.id) if user_signed_in?
+      format.html { render }
+      format.json { render json: @comment }
+    end
   end
 
   def edit
