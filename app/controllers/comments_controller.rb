@@ -26,7 +26,10 @@ class CommentsController < ApplicationController
     @comment = Comment.find params[:id]
     @post = Post.find params[:post_id]
     @comment.destroy
-    redirect_to post_path(@post), notice: "Comment deleted."
+    respond_to do |format|
+      format.html { redirect_to post_path(@post), notice: "Comment deleted." }
+      format.js   { render :destroy }
+    end
   end
 
   private

@@ -1,4 +1,4 @@
-<div class="well">
+<div class="well" id="<%= dom_id(cmt)%>">
   <em>On <%= formatted_date(cmt.created_at) %>, <%= cmt.user_name %> said: </em>
   <div class="well">
     <%= cmt.body  %>
@@ -6,6 +6,7 @@
   <%= link_to "Delete", post_comment_path(@post, cmt), 
                         method: :delete,
                         class: "btn btn-danger",
-                        data: {confirm: "Are you sure?"} %>
+                        data: {confirm: "Are you sure?"},
+                        remote: true  %>
 </div>
  
