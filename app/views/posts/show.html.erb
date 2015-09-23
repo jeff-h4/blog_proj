@@ -1,0 +1,61 @@
+
+<h1>Showing post</h1>
+<!--======================POST DISPLAY==============================   -->
+<h2><%= @post.title  %></h2>
+<em>Created by:<%= @post.user_name  %> on <%= formatted_date(@post.created_at) %></em>
+<p><%= @post.body %></p>
+<p>Favourited by <%= @post.favourited_users.count  %> users</p>
+<p>Tags: <%= @post.tags.map(&:name).join(", ")  %></p>
+<!--======================Change Favourite==============================   -->
+<% if user_signed_in?  %>
+  <% if current_user.favourited_post?(@post)  %>
+    <%= link_to fa_icon("star"), post_favourite_path(@post,@favourite), title: "Un-Favourite", class: "big-icon", method: :delete%>
+  <% else  %>
+    <%= link_to fa_icon("star-o"), post_favourites_path(@post), title: "Favourite", class: "big-icon", method: :post  %>
+  <% end %>
+<% end %>
+
+<!--======================Edit and Delete==============================   -->
+<% if user_signed_in?  %>
+  <%# The can? method calls will only prevent displaying the link  %>
+  <%# It will not protect against manual URL entry for editing/deleting  %>
+  <% if can? :edit, @post  %>
+    <%= link_to "Edit", edit_post_path(@post), class: "btn btn-info"  %>
+  <% end %>
+  <% if can? :destroy, @post  %>
+    <%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"  %>
+  <% end %>
+<% end %>
+
+<!--======================Add Comments==============================   -->
+<hr>
+<div class="container-fluid">
+  <div class="well">
+    <h2>Add a new comment: </h2>
+    <%= render "/layouts/alertflash"   %>
+    <% if @comment.errors.any?  %>
+      <ul>
+        <% @comment.errors.full_messages.each do |err|  %>
+          <li><%= err  %></li>
+        <% end %>
+      </ul>
+    <% end  %>
+    <%= form_for [@post,@comment], remote: true do |f|  %>
+      <div class="form-group">
+        <%= f.label :body  %>
+        <%= f.text_area :body, class: "form-control"  %>
+      </div>
+      <%= f.submit "Add Comment", class: "btn btn-primary"  %> 
+    <% end %>
+  </div>
+<!--======================Display Comments==============================   -->
+  <div class="well">
+    <h2>Discussion:</h2>
+    <div class="discussion">
+      <% @post.comments.reverse.each do |cmt|  %>
+        <%= render 'comments/comment', cmt: cmt %>
+     <% end  %>
+    </div>
+  </div>
+</div>
+  

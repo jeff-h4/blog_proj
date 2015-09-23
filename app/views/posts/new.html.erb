@@ -1,0 +1,10 @@
+
+<% if @current_user.posts.count == 0  %>
+  <h1> Why don't you create your FIRST blog post now?</h1>
+<% else  %>
+    <h1>Create a NEW blog post:</h1>
+<% end  %>
+
+<hr>
+<%= render "form"  %>
+

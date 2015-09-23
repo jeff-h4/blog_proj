@@ -1,0 +1,7 @@
+
+<!-- We will selectively render this for pages that need flash  -->
+<% if flash[:notice]  %>
+  <div role="alert"><%= flash[:notice]  %></div>
+<% elsif flash[:alert]  %>
+  <div role="alert"><%= flash[:alert]  %></div>
+<% end %>

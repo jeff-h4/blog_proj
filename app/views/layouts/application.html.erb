@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>BlogProj</title>
+  <title>The Blog Project</title> 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="container">
+    <%= render "/layouts/nav"  %>
 
-<%= yield %>
-
+    <%= yield %>
+    <% if @post  %>
+      <% if @post.errors.any? %>
+          <ul>
+          <% @post.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    <% end %>
+  </div>
 </body>
 </html>
